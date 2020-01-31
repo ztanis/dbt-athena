@@ -12,11 +12,13 @@ A dbt profile can be configured to run against Presto using the following config
 
 | Option  | Description                                        | Required?               | Example                  |
 |---------|----------------------------------------------------|-------------------------|--------------------------|
-| s3_staging_dir  | The location where Athena stores meta info | Required  | s3://bucket/staging |
-| database  | Specify the database to build models into | Required  | `analytics` |
-| schema  | Specify the schema to build models into | Required | `dbt_drew` |
-| region_name | Specify in which AWS region it should connect | Required | `eu-west-1` |
-| threads    | How many threads dbt should use | Optional(default=`1`) | `8` |
+| s3_staging_dir   | The location where Athena stores meta info | Required  | s3://bucket/staging |
+| database         | Specify the database to build models into | Required  | `analytics` |
+| schema           | Specify the schema to build models into | Required | `dbt_drew` |
+| region_name      | Specify in which AWS region it should connect | Required | `eu-west-1` |
+| threads          | How many threads dbt should use | Optional(default=`1`) | `8` |
+| max_retry_number | Number for retries for exponential backoff | Optional(default=`5`) | `8` |
+| max_retry_delay  | Maximum delay for exponential backoff in seconds | Optional(default=`100`) | `8` |
 
 
 **Example profiles.yml entry:**
@@ -41,7 +43,7 @@ The following features of dbt are not implemented on Presto:
 - Incremental models
 
 
-If you are interested in helping to add support for this functionality in dbt on Presto, please [open an issue](https://github.com/fishtown-analytics/dbt-athena/issues/new)!
+If you are interested in helping to add support for this functionality in dbt on Athena, please [open an issue](https://github.com/fishtown-analytics/dbt-athena/issues/new)!
 
 Known issues:
 
