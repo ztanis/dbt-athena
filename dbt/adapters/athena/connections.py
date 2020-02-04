@@ -30,7 +30,6 @@ class AthenaCredentials(Credentials):
     max_retry_number: int = 5
     max_retry_delay: int = 100
 
-
     _ALIASES = {
         'catalog': 'database'
     }
@@ -143,7 +142,7 @@ class AthenaConnectionManager(SQLConnectionManager):
     TYPE = 'athena'
 
     @contextmanager
-    def exception_handler(self, sql):
+    def exception_handler(self, sql: str):
         try:
             yield
         # TODO: introspect into `DatabaseError`s and expose `errorName`,
@@ -176,7 +175,7 @@ class AthenaConnectionManager(SQLConnectionManager):
         conn = connect(
             s3_staging_dir=credentials.s3_staging_dir,
             region_name=credentials.region_name,
-            schema_name=credentials.schema,
+            schema_name=credentials.database,
             cursor_class=AsyncCursor,
             retry_config=RetryConfig(attempt=credentials.max_retry_number, max_delay=credentials.max_retry_delay)
         )
